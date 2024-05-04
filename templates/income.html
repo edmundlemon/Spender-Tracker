@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Incomes
+{% endblock %}
+
+{% block main %}
+<div class="m-3">
+    <h2>Income Recording</h2>
+</div>
+    <form action="/income" method="post">
+        <div class="mb-3">
+            <select class="form-control mx-auto w-25" name="type" id="type" type="text">
+                <option disabled selected>Type of Income</option>
+                {% for type in types %}
+                <option  value="{{ type }}"> {{ type }} </option>
+                {% endfor %}
+            </select>
+            <!-- <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="type" name="type" placeholder="Expense Type" type="text"> -->
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-25" id="amount" name="amount" placeholder="Amount" type="text" inputmode="numeric" step = "any">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-25" id="date" name="date" placeholder="Date" type="date">
+        </div>
+        <button class="btn btn-primary" type="submit">Record</button>
+    </form>
+{% endblock %}

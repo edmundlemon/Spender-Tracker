@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <div class="col-12 mb-4">
+        <form action="/history" method="post">
+            <select class="form-control mx-auto w-auto custom-select" name="month" id="month" type="text">
+                    <option disabled selected>Select Month to view</option>
+                    {% for month in months %}
+                    <option  value="{{ month }}"> {{ month }} </option>
+                    {% endfor %}
+            </select>
+            <button class="btn btn-primary my-3" type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="container my-5">
+        <h2>Your transaction history for month of {{ today }}</h2>
+        <div class="row">
+            <div class="col-md-6 col-12">
+                <h3 class="p-3">Your Spending History</h3>
+                {%if spendingHistory%}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for spending in spendingHistory %}
+                            <tr>
+                                <td>{{ spending["type"] }}</td>
+                                <td>{{ spending["amount"] | usd }} </td>
+                                <td>{{ spending["date"] }}</td>
+                                <td><a href="/delete/{{spending['id']}}" method="post" ><i class="uil uil-trash"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="container my-5">
+                        <p>No data recorded yet!</p>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-6 col-12">
+                <h3 class="p-3">Your Income History</h3>
+                {%if incomeHistory%}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for income in incomeHistory %}
+                            <tr>
+                                <td>{{ income["type"] }}</td>
+                                <td>{{ income["amount"] | usd }} </td>
+                                <td>{{ income["date"] }}</td>
+                                <td><a href="/delete/{{income['id']}}" method="post" ><i class="uil uil-trash"></i></a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="container my-5">
+                        <p>No data recorded yet!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
