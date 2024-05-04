@@ -1,0 +1,21 @@
+# SPENDER TRACKER
+## Video Demo: <https://youtu.be/IrvyDnud2L4>
+#### Description:
+##### This is a software that I wrote for tracking spendings. Reason I wrote this is because I tend to overspend, and it came to my mind to make this into a project to remind me control my spending. This project is build on Flask. This app also uses Bootstrap for the CSS.
+
+##### In templates file, firstly I've created a layout.html file to keep my basic layout throughout the app would be consistent.
+###### apology.html is to render a template when the password, or registration process goes wrong, with the relevant error description provided.
+###### history.html is to use for displaying the history of all transaction recorded using this app.
+###### income.html is used for recording the income for this app.
+###### index.html this template is to display piechart of the spending and also the income chart, this is done using Google Charts insode of this app. This page also displays cashflow as digit inside the page.
+###### login.html is a template for login interface.
+###### password.html is for chaging password interface in this app.
+###### register.html is the template for registering new user.
+
+##### In data.db we have designed the table for storing users information. In data.db we have 2 tables, transactions and user. For user table, we have 3 column inside, which is id, username and hash. id field is a primary key and to store it's user id inside this data base as its' identification. username is used when logging in, and should be prompted by the use upon registering the account. Lastly we have hash column, this is the cokumn to store the password, but not in the exact password for safety purposes. Instead, it is store in hash format hence it is encrypted.
+##### The another table, transactions, this table is used to store all the transactions that is recorded by the user. We have 5 column in transactions, which is id, user_id, amount, type, date. The id column a primary key, which is unique for each record made to the app. user_id column is the column to record the id, back in user table to identify the transaction according to user. Amount column is to record the amount recorded by the user, if it is income would be a positive number, if it's spending, it would be recorded in negative number. type column is for the record of types of spending/ income, associated to the transaction recorded by user. Lastly we have date column to record the date which the user desired to put.
+
+##### This paragraph is to describe helper.py. In helper.py, we have a few function, firstly apology. This is to display apology.html if user put invalid information during registering and login. login_required is the function to only access login page if user doesn’t log in. this prevents user from using the service without an account since we need the information when recording the transactions. Usd function is used to display on the website with the dollar sign in front, on history page. In compare function, we would be checking if the word is inside the list. If word is inside the list, function would return True while if word is not in list, the function would return False.
+
+##### Finally we have app.py, which is the main code for this app. In index, this would display the piechart of spending and income chart, by using Google Chart. This function also displays the Cashflow, to show the remaining money you have for the month. Next, we got register function, this function is to let user register an account, by having an username, and a password, but we have the confirmation password to check if user inputs both passwords correctly to rule out the case of typo. Login function is for user to log in to their own account. Logout function is to clear any session, and logs the user out from the active session. Expenses function lets user to record their expense into the database, and income function lets the user to record their income with the desired date. History function lets user to check back their transaction, both income and expense and allows them to delete if they keyed-in the wrong information when recording it. Lasty, the passwordChange function. This function allows the user to change their password at anytime, It is recommended for the user to change their password every month.
+
